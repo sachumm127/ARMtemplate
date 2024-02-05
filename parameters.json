@@ -1,0 +1,183 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "uksouth"
+        },
+        "extendedLocation": {
+            "value": {}
+        },
+        "virtualNetworkName": {
+            "value": "myvenet"
+        },
+        "tagsByResource": {
+            "value": {
+                "Microsoft.Network/virtualNetworks": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/ddosProtectionPlans": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/publicIPAddresses": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/azureFirewalls": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/bastionHosts": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/natGateways": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/publicIPPrefixes": {
+                    "env": "dev"
+                },
+                "Microsoft.Network/networkSecurityGroups": {
+                    "env": "dev"
+                }
+            }
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "natGatewaysWithNewPublicIpAddress": {
+            "value": [
+                {
+                    "name": "Nat-ip",
+                    "properties": {
+                        "publicIpAddresses": [
+                            {
+                                "id": "/subscriptions/1c9da3ef-3dfa-4cdd-9456-84320c751390/resourcegroups/test/providers/Microsoft.Network/publicIpAddresses/privatesubnet"
+                            }
+                        ],
+                        "publicIpPrefixes": []
+                    }
+                }
+            ]
+        },
+        "natGatewaysWithoutNewPublicIpAddress": {
+            "value": []
+        },
+        "natGatewayPublicIpAddressesNewNames": {
+            "value": [
+                "privatesubnet"
+            ]
+        },
+        "networkSecurityGroupsNew": {
+            "value": []
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "public_subnet",
+                    "properties": {
+                        "addressPrefixes": [
+                            "10.0.0.0/24"
+                        ],
+                        "defaultOutboundAccess": true
+                    }
+                },
+                {
+                    "name": "AzureBastionSubnet",
+                    "properties": {
+                        "addressPrefix": "10.0.1.0/26",
+                        "addressPrefixes": [],
+                        "defaultOutboundAccess": true
+                    }
+                },
+                {
+                    "name": "privatesubnet",
+                    "properties": {
+                        "addressPrefixes": [
+                            "10.0.2.0/24"
+                        ],
+                        "defaultOutboundAccess": false,
+                        "natGateway": {
+                            "id": "/subscriptions/1c9da3ef-3dfa-4cdd-9456-84320c751390/resourcegroups/test/providers/Microsoft.Network/natGateways/Nat-ip"
+                        }
+                    }
+                }
+            ]
+        },
+        "ddosProtectionPlanEnabled": {
+            "value": false
+        },
+        "firewallEnabled": {
+            "value": false
+        },
+        "firewallSkuTier": {
+            "value": "Standard"
+        },
+        "firewallPolicyIsNew": {},
+        "firewallPolicyId": {},
+        "firewallPolicyTier": {},
+        "firewallPublicIpAddressIsNew": {
+            "value": false
+        },
+        "firewallPublicIpAddressId": {
+            "value": ""
+        },
+        "bastionEnabled": {
+            "value": true
+        },
+        "bastionName": {
+            "value": "myvenet-Bastion"
+        },
+        "bastionPublicIpAddressIsNew": {
+            "value": true
+        },
+        "bastionPublicIpAddressName": {
+            "value": "myvenet-bastion"
+        },
+        "bastionNsgIsNew": {},
+        "bastionNsgId": {},
+        "encryptionEnabled": {
+            "value": false
+        },
+        "encryptionEnforcement": {
+            "value": "AllowUnencrypted"
+        },
+        "addressSpaceStartingAddressChanged": {
+            "value": false
+        },
+        "addressSpaceAddressSizeChanged": {
+            "value": false
+        },
+        "ipv6Enabled": {
+            "value": false
+        },
+        "defaultSubnetChanged": {
+            "value": true
+        },
+        "subnetsInfo": {
+            "value": [
+                {
+                    "name": "Default",
+                    "natGw": "none",
+                    "nsg": "none",
+                    "udr": "none"
+                },
+                {
+                    "cidr": "10.0.1.0/26",
+                    "name": "Azure Bastion",
+                    "natGw": "none",
+                    "nsg": "none",
+                    "udr": "none"
+                },
+                {
+                    "name": "Default",
+                    "natGw": "new",
+                    "nsg": "none",
+                    "udr": "none"
+                }
+            ]
+        },
+        "subnetCount": {
+            "value": 3
+        }
+    }
+}
